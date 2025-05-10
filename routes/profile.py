@@ -11,12 +11,20 @@ from typing import List
 router = APIRouter(prefix="/profile", tags=["Profile"])
 
 @router.post("/skills", response_model=SkillResponse)
-def add_skill(skill: SkillCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    new_skill = Skill(**skill.dict(), user_id=current_user.id)
-    db.add(new_skill)
+def add_skill_to_profile(skill_data: SkillCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    if current_user.role != "candidate":
+        raise HTTPException(status_code=403, detail="Only candidates can add skills")
+
+    existing = db.query(UserSkill).filter_by(user_id=current_user.id, skill_id=skill_data.skill_id).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Skill already added")
+
+    new_user_skill = UserSkill(user_id=current_user.id, skill_id=skill_data.skill_id, level=skill_data.level)
+    db.add(new_user_skill)
     db.commit()
-    db.refresh(new_skill)
-    return new_skill
+    db.refresh(new_user_skill)
+    return new_user_skill.skill  # ← zwracamy obiekt umiejętności (dla frontend)
+
 
 @router.post("/certifications", response_model=CertificationResponse)
 def add_cert(cert: CertificationCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
