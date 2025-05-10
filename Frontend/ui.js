@@ -362,3 +362,33 @@ document.addEventListener('DOMContentLoaded', function() {
         notificationBell.addEventListener('click', openNotificationModal);
     }
 });
+
+function renderCandidateSkillSelector(skills) {
+    const select = document.getElementById("candidate-skill-selector");
+    if (!select) return;
+
+    select.innerHTML = '';
+
+    const grouped = {};
+    skills.forEach(skill => {
+        if (!grouped[skill.category]) {
+            grouped[skill.category] = [];
+        }
+        grouped[skill.category].push(skill);
+    });
+
+    Object.entries(grouped).forEach(([category, skillList]) => {
+        const optgroup = document.createElement('optgroup');
+        optgroup.label = category;
+
+        skillList.forEach(skill => {
+            const option = document.createElement('option');
+            option.value = skill.id;
+            option.textContent = skill.name;
+            optgroup.appendChild(option);
+        });
+
+        select.appendChild(optgroup);
+    });
+}
+
