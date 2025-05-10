@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from models.skill import Skill
 from models.certification import Certification
 from models.user import User
+from models.user_skill import UserSkill
 from schemas import SkillCreate, SkillResponse, CertificationCreate, CertificationResponse
 from database import get_db
 from routes.auth import get_current_user
