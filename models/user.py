@@ -15,5 +15,5 @@ class User(Base):
     refresh_token = Column(String, nullable=True)
     refresh_expiry = Column(DateTime, nullable=True)  # 🆕 Dodajemy datę wygaśnięcia refresh_tokena
     
-    # skills = relationship("Skill", back_populates="user", cascade="all, delete-orphan")
+    skills = relationship("UserSkill", back_populates="user", cascade="all, delete-orphan")
     certifications = relationship("Certification", back_populates="user", cascade="all, delete-orphan")
