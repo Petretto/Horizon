@@ -12,6 +12,7 @@ from routes.match import router as match_router
 from database import engine, Base
 import os
 
+Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 # ⚙️ CORS — dopuszczamy dostęp z lokalnego frontendu
