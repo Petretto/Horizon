@@ -24,7 +24,7 @@ class RefreshTokenRequest(BaseModel):
 # -------------------- SKILLS --------------------
 
 class SkillCreate(BaseModel):
-    name: str
+    skill_id: int
     level: str
 
 class SkillResponse(SkillCreate):
