@@ -405,9 +405,15 @@ async function fetchUserData() {
 }
 
 async function addSkill() {
-    const name = document.getElementById("skill-name").value;
+    const select = document.getElementById("candidate-skill-selector");
+    const skillId = parseInt(select.value);
     const level = document.getElementById("skill-level").value;
-  
+
+    if (!skillId || !level) {
+        showNotification("Wybierz umiejętność i poziom", true);
+        return;
+    }
+
     try {
         const response = await fetch(`${apiUrl}/profile/skills`, {
             method: "POST",
@@ -415,12 +421,11 @@ async function addSkill() {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${accessToken}`,
             },
-            body: JSON.stringify({ name, level }),
+            body: JSON.stringify({ skill_id: skillId, level }),
         });
-    
+
         if (response.ok) {
             showNotification("Dodano umiejętność", false);
-            document.getElementById("skill-name").value = "";
             await loadProfileData();
         } else {
             const data = await response.json();
@@ -431,6 +436,7 @@ async function addSkill() {
         console.error("Błąd dodawania umiejętności:", err);
     }
 }
+
   
 async function addCertification() {
     const title = document.getElementById("cert-title").value;
