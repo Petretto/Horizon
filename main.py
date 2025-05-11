@@ -53,4 +53,4 @@ app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
 @app.get("/")
 def root():
     # return FileResponse(os.path.join(frontend_dir, "index.html"))
-    return FileResponse(os.path.join(frontend_dir, "simple-index.html"))
+    return FileResponse(os.path.join(frontend_dir, "index.html"))
