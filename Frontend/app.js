@@ -73,11 +73,12 @@ async function login() {
                 fetchInvitations()
             ]);
             renderCandidateDashboard(offers, applications, invitations);
-            await loadProfileData(); // <-- nowo dodane
+            await loadCandidateSkillOptions();
+            await loadProfileData(); 
             showSection('dashboard-view');
         } else {
             await loadJobOffers();
-            await loadEmployerApplications(); // <-- nowo dodane
+            await loadEmployerApplications(); 
             showSection('offers-view');
         }
 
