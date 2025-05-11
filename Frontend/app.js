@@ -448,8 +448,7 @@ async function fetchUserData() {
 }
 
 async function addSkill() {
-    const select = document.getElementById("candidate-skill-selector");
-    const skillId = parseInt(select.value);
+    const skillId = document.getElementById("candidate-skill-selector").value;
     const level = document.getElementById("skill-level").value;
 
     if (!skillId || !level) {
@@ -464,7 +463,7 @@ async function addSkill() {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${accessToken}`,
             },
-            body: JSON.stringify({ skill_id: skillId, level }),
+            body: JSON.stringify({ skill_id: parseInt(skillId), level }),
         });
 
         if (response.ok) {
@@ -479,6 +478,7 @@ async function addSkill() {
         console.error("Błąd dodawania umiejętności:", err);
     }
 }
+
 
   
 async function addCertification() {
