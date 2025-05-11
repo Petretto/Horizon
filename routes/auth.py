@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+import models
 from models.user import User
 from schemas import UserCreate, UserResponse, TokenResponse, RefreshTokenRequest
+import schemas
 from utils import hash_password
 import jwt
 import datetime
@@ -62,20 +64,23 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 
     return user    
 
-@router.post("/register", response_model=UserResponse)
-def register_user(user_data: UserCreate, db: Session = Depends(get_db)):
-    """Rejestracja nowego użytkownika"""
-    existing_user = db.query(User).filter(User.email == user_data.email).first()
-    if existing_user:
+@router.post("/register", response_model=schemas.User)
+def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
-
-    hashed_password = hash_password(user_data.password)
-    new_user = User(email=user_data.email, password=hashed_password, role=user_data.role)
-    
+    hashed_password = pwd_context.hash(user.password)
+    new_user = models.User(
+        email=user.email,
+        hashed_password=hashed_password,
+        role=user.role,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        company_name=user.company_name if user.role == "employer" else None
+    )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    
     return new_user
 
 @router.post("/token", response_model=TokenResponse)
