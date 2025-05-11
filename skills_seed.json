@@ -1,0 +1,84 @@
+[
+  {
+    "category": "IT",
+    "skills": [
+      { "name": "JavaScript" },
+      { "name": "Python" },
+      { "name": "Java" },
+      { "name": "SQL" },
+      { "name": "React" },
+      { "name": "Node.js" },
+      { "name": "Docker" },
+      { "name": "Git" },
+      { "name": "Linux" },
+      { "name": "HTML/CSS" }
+    ]
+  },
+  {
+    "category": "Produkcja",
+    "skills": [
+      { "name": "Obsługa maszyn CNC" },
+      { "name": "Spawanie MIG/MAG" },
+      { "name": "Lean Manufacturing" },
+      { "name": "Six Sigma" },
+      { "name": "Zarządzanie jakością" },
+      { "name": "Rysunek techniczny" },
+      { "name": "Automatyka przemysłowa" },
+      { "name": "Systemy ERP" },
+      { "name": "BHP" }
+    ]
+  },
+  {
+    "category": "Biznes",
+    "skills": [
+      { "name": "Zarządzanie projektami" },
+      { "name": "Analiza biznesowa" },
+      { "name": "Negocjacje" },
+      { "name": "Prezentacje biznesowe" },
+      { "name": "Zarządzanie zespołem" },
+      { "name": "Zarządzanie zmianą" }
+    ]
+  },
+  {
+    "category": "Języki obce",
+    "skills": [
+      { "name": "Angielski" },
+      { "name": "Niemiecki" },
+      { "name": "Francuski" },
+      { "name": "Hiszpański" },
+      { "name": "Włoski" },
+      { "name": "Rosyjski" }
+    ]
+  },
+  {
+    "category": "Marketing",
+    "skills": [
+      { "name": "SEO" },
+      { "name": "Google Ads" },
+      { "name": "Content Marketing" },
+      { "name": "Social Media" },
+      { "name": "Email Marketing" },
+      { "name": "Analiza danych marketingowych" }
+    ]
+  },
+  {
+    "category": "HR",
+    "skills": [
+      { "name": "Rekrutacja" },
+      { "name": "Onboarding" },
+      { "name": "Rozwój pracowników" },
+      { "name": "Prawo pracy" },
+      { "name": "Employer Branding" }
+    ]
+  },
+  {
+    "category": "Finanse",
+    "skills": [
+      { "name": "Księgowość" },
+      { "name": "Analiza finansowa" },
+      { "name": "Budżetowanie" },
+      { "name": "Kontrolling" },
+      { "name": "MS Excel (zaawansowany)" }
+    ]
+  }
+]
