@@ -143,15 +143,19 @@
                         </div>
                         
                         <h4>Umiejętności</h4>
-                        <ul id="skills-list" class="skills-list"></ul>
+                        <ul id="skills-list" class="skills-list">
+                            <!-- Przykładowy wpis (wypełniany dynamicznie w JS) -->
+                            <!-- <li><span class="skill-name">Python</span> – <span class="skill-level">zaawansowany</span></li> -->
+                        </ul>
+
                         <div class="add-skill-form">
-                            <input type="text" id="skill-name" placeholder="Nazwa umiejętności" class="form-input">
+                            <select id="candidate-skill-selector" class="form-input"></select>
                             <select id="skill-level" class="form-input">
                                 <option value="początkujący">Początkujący</option>
                                 <option value="średniozaawansowany">Średniozaawansowany</option>
                                 <option value="zaawansowany">Zaawansowany</option>
                             </select>
-                            <button onclick="addSkill()" class="btn btn-primary">Dodaj umiejętność</button>
+                            <button class="btn btn-primary" onclick="addSkill()">Dodaj umiejętność</button>
                         </div>
                         
                         <h4>Certyfikaty</h4>
@@ -264,7 +268,7 @@
         </div>
     </div>
 
-    <script src="ui.js"></script>
-    <script src="app.js"></script>
+    <script src="ui.js" defer></script>
+    <script src="app.js" defer></script>
 </body>
 </html>
