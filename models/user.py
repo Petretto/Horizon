@@ -1,11 +1,10 @@
 from sqlalchemy import Column, Integer, String, DateTime, Enum
 import datetime
 from models.base import Base
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from enum import Enum as PyEnum
 
-Base = declarative_base()
+
 
 class UserRole(PyEnum):
     candidate = "candidate"
