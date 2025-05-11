@@ -68,8 +68,8 @@ class UserSkillResponse(BaseModel):
 class UserResponse(BaseModel):
     id: int
     email: str
-    role: str
-    skills: List[SkillResponse] = []
+    role: UserRole
+    skills: List[UserSkillResponse] = []
     certifications: List[CertificationResponse] = []
 
     class Config:
