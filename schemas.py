@@ -58,6 +58,13 @@ class UserResponse(BaseModel):
 
     class Config:
         orm_mode = True
+        
+class UserSkillResponse(BaseModel):
+    skill: SkillResponse
+    level: str
+
+    class Config:
+        orm_mode = True        
 
 class CandidateResponse(BaseModel):
     id: int
