@@ -364,31 +364,47 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function renderCandidateSkillSelector(skills) {
-    const select = document.getElementById("candidate-skill-selector");
-    if (!select) return;
+    const container = document.getElementById("candidate-skills-selector");
+    if (!container) return;
 
-    select.innerHTML = '';
+    container.innerHTML = '';
+
+    // ❗ tutaj upewniamy się, że to TABLICA
+    if (!Array.isArray(skills)) {
+        console.error("Nieprawidłowe dane umiejętności:", skills);
+        return;
+    }
 
     const grouped = {};
-    skills.forEach(skill => {
+
+    skills.forEach(userSkill => {
+        const { skill, level } = userSkill;
+        if (!skill || !skill.category) return;
+
         if (!grouped[skill.category]) {
             grouped[skill.category] = [];
         }
-        grouped[skill.category].push(skill);
+        grouped[skill.category].push({ ...skill, level });
     });
 
     Object.entries(grouped).forEach(([category, skillList]) => {
-        const optgroup = document.createElement('optgroup');
-        optgroup.label = category;
+        const categoryDiv = document.createElement('div');
+        categoryDiv.innerHTML = `<h4>${category}</h4>`;
+        categoryDiv.className = 'skill-group-container';
 
         skillList.forEach(skill => {
-            const option = document.createElement('option');
-            option.value = skill.id;
-            option.textContent = skill.name;
-            optgroup.appendChild(option);
+            const skillDiv = document.createElement('div');
+            skillDiv.className = 'skill-selector-item';
+
+            const label = document.createElement('label');
+            label.textContent = `${skill.name} (${skill.level})`;
+
+            skillDiv.appendChild(label);
+            categoryDiv.appendChild(skillDiv);
         });
 
-        select.appendChild(optgroup);
+        container.appendChild(categoryDiv);
     });
 }
+
 
