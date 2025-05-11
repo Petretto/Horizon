@@ -13,9 +13,9 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
     role: UserRole
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    company_name: Optional[str] = None
+    first_name: str
+    last_name: str
+    company_name: Optional[str] = None # tylko dla pracodawcy
 
 class LoginRequest(BaseModel):
     email: str
