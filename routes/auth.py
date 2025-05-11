@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 import models
 from models.user import User
-from schemas import UserCreate, UserResponse, TokenResponse, RefreshTokenRequest
+from schemas import UserResponse, TokenResponse, RefreshTokenRequest
 import schemas
-from utils import hash_password
+# from utils import hash_password
 import jwt
 import datetime
 from passlib.context import CryptContext
