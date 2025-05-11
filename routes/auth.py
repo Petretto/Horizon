@@ -14,7 +14,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt import PyJWTError
 from uuid import uuid4
 from pydantic import BaseModel, EmailStr
-from passlib.context import CryptContext
+
 
     
 
@@ -72,7 +72,7 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     hashed_password = pwd_context.hash(user.password)
     new_user = models.User(
         email=user.email,
-        hashed_password=hashed_password,
+        password=hashed_password,
         role=user.role,
         first_name=user.first_name,
         last_name=user.last_name,
@@ -124,6 +124,7 @@ def refresh_token(request: RefreshTokenRequest, db: Session = Depends(get_db)):
     # Aktualizujemy refresh token w bazie
     user.refresh_token = new_refresh_token
     user.refresh_expiry = new_refresh_expiry
+    db.refresh(user)
     db.commit()
 
     return {
