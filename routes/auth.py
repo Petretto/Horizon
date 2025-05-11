@@ -64,7 +64,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 
     return user    
 
-@router.post("/register", response_model=schemas.User)
+@router.post("/register", response_model=schemas.UserResponse)
 def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
