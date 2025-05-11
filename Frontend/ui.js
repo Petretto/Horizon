@@ -187,20 +187,16 @@ function renderJobOffers(offers) {
 }
 
 function renderProfileSkills(skills) {
-    const container = document.getElementById('skills-list');
-    if (!container) return;
+    const list = document.getElementById("skills-list");
+    if (!list) return;
 
-    container.innerHTML = '';
+    list.innerHTML = "";
 
-    if (Array.isArray(skills) && skills.length > 0) {
-        skills.forEach(skill => {
-            const li = document.createElement('li');
-            li.textContent = `${skill.name} - ${skill.level}`;
-            container.appendChild(li);
-        });
-    } else {
-        container.innerHTML = '<li>Brak umiejętności.</li>';
-    }
+    skills.forEach(skill => {
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="skill-name">${skill.skill.name}</span> – <span class="skill-level">${skill.level}</span>`;
+        list.appendChild(li);
+    });
 }
 
 function renderProfileCertifications(certs) {
@@ -406,5 +402,4 @@ function renderCandidateSkillSelector(skills) {
         container.appendChild(categoryDiv);
     });
 }
-
 
