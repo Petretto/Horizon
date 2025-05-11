@@ -1,13 +1,21 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional, List
 from datetime import datetime
+from enum import Enum
 
 # -------------------- UŻYTKOWNICY --------------------
+class UserRole(str, Enum):
+    candidate = "candidate"
+    employer = "employer"
+
 
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
-    role: str  # "candidate" lub "employer"
+    role: UserRole
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    company_name: Optional[str] = None
 
 class LoginRequest(BaseModel):
     email: str
@@ -49,6 +57,14 @@ class CertificationResponse(CertificationCreate):
 
 # -------------------- UŻYTKOWNIK - ODPOWIEDŹ --------------------
 
+class UserSkillResponse(BaseModel):
+    skill: SkillResponse
+    level: str
+
+    class Config:
+        orm_mode = True
+
+
 class UserResponse(BaseModel):
     id: int
     email: str
@@ -58,13 +74,6 @@ class UserResponse(BaseModel):
 
     class Config:
         orm_mode = True
-        
-class UserSkillResponse(BaseModel):
-    skill: SkillResponse
-    level: str
-
-    class Config:
-        orm_mode = True        
 
 class CandidateResponse(BaseModel):
     id: int
