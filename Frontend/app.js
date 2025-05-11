@@ -391,11 +391,53 @@ async function loadProfileData() {
         const user = await fetchUserData();
         renderProfileSkills(user.skills || []);
         renderProfileCertifications(user.certifications || []);
+        const response = await fetch(`${apiUrl}/skills`);
+        const skills = await response.json();
+        renderCandidateSkillSelector(skills);
     } catch (err) {
         console.error("Błąd ładowania profilu:", err);
         showNotification("Błąd ładowania danych profilu", true);
     }
 }
+
+async function loadCandidateSkillOptions() {
+    try {
+        const response = await fetch(`${apiUrl}/skills`);
+        const skills = await response.json();
+
+        const select = document.getElementById("candidate-skill-selector");
+        if (!select) return;
+
+        select.innerHTML = ""; // wyczyść stare opcje
+
+        // Grupowanie po kategorii
+        const grouped = {};
+        skills.forEach(skill => {
+            if (!grouped[skill.category]) grouped[skill.category] = [];
+            grouped[skill.category].push(skill);
+        });
+
+        // Tworzenie <optgroup> i <option>
+        Object.entries(grouped).forEach(([category, skillList]) => {
+            const group = document.createElement("optgroup");
+            group.label = category;
+
+            skillList.forEach(skill => {
+                const option = document.createElement("option");
+                option.value = skill.id;
+                option.textContent = skill.name;
+                group.appendChild(option);
+            });
+
+            select.appendChild(group);
+        });
+
+    } catch (err) {
+        console.error("Błąd ładowania umiejętności kandydata:", err);
+        showNotification("Nie udało się załadować listy umiejętności", true);
+    }
+}
+
 
 async function fetchUserData() {
     const response = await fetch(`${apiUrl}/auth/me`, {
