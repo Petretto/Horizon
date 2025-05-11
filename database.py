@@ -12,7 +12,7 @@ from models.offer_skill import OfferSkill
 
   
 
-DATABASE_URL = "postgresql://job_admin:AliCzek2019!@localhost/wip_platform"
+DATABASE_URL = "xxx"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
